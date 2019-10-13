@@ -11,9 +11,6 @@
 /**
  * Backend Modules
  */
-array_insert($GLOBALS['BE_MOD']['content'], count($GLOBALS['BE_MOD']['content']), ['vrpayment_intranet_menue' => [
-    'tables' => ['tl_vrp_intranet_menue'], ],
-]);
 
 array_insert($GLOBALS['BE_MOD'], 0, [
     'vrpayment-intranet' => [
@@ -22,3 +19,8 @@ array_insert($GLOBALS['BE_MOD'], 0, [
         ],
     ],
 ]);
+
+/**
+ * Frontend Modules
+ */
+$GLOBALS['FE_MOD']['vrpayment-intranet']['vrp-menue-list'] = 'Vrpayment\ContaoIntranetBundle\Module\MenueList';
