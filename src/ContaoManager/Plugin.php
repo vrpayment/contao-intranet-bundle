@@ -15,6 +15,8 @@ use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
 use Vrpayment\ContaoIntranetBundle\ContaoIntranetBundle;
 
 class Plugin implements BundlePluginInterface
@@ -25,6 +27,8 @@ class Plugin implements BundlePluginInterface
             BundleConfig::create(ContaoIntranetBundle::class)
                 ->setLoadAfter([
                     ContaoCoreBundle::class,
+                    FrameworkBundle::class,
+                    TwigBundle::class
        ]),
         ];
     }

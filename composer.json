@@ -15,8 +15,7 @@
     "symfony/framework-bundle": "^3.3",
     "symfony/monolog-bundle": "^3.4",
     "ext-curl": "*",
-    "ramsey/uuid": "^3.8",
-    "netzmacht/contao-form-bundle": "1.*"
+    "ramsey/uuid": "^3.8"
   },
   "conflict": {
     "contao/core": "*",
