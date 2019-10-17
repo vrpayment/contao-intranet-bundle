@@ -1,9 +1,1 @@
-# We're using forms
-framework:
-    form: ~
-    templating:
-        engines: ['twig']
 
-twig:
-    paths:
-        '%kernel.project_dir%/src/Resources/views': ContaoIntranet

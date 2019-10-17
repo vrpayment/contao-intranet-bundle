@@ -26,10 +26,8 @@ class Plugin implements BundlePluginInterface
         return [
             BundleConfig::create(ContaoIntranetBundle::class)
                 ->setLoadAfter([
-                    ContaoCoreBundle::class,
-                    FrameworkBundle::class,
-                    TwigBundle::class
-       ]),
+                    ContaoCoreBundle::class
+                    ]),
         ];
     }
 }

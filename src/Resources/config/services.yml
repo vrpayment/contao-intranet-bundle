@@ -1,9 +1,9 @@
 services:
-    # Form types
-    Vrpayment\ContaoIntranetBundle\Form\RequestTokenType:
-        class: Vrpayment\ContaoIntranetBundle\Form\RequestTokenType
-        arguments:
-            - "@contao.csrf.token_manager"
-            - "%contao.csrf_token_name%"
-        tags:
-            - { name: 'form.type' }
+    _instanceof:
+        Contao\CoreBundle\Framework\FrameworkAwareInterface:
+            calls:
+                - ["setFramework", ["@contao.framework"]]
+
+        Symfony\Component\DependencyInjection\ContainerAwareInterface:
+            calls:
+                - ["setContainer", ["@service_container"]]

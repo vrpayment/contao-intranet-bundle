@@ -9,4 +9,4 @@
  */
 
 $GLOBALS['TL_LANG']['FMD']['vrpayment-intranet'] = ['VrPayment Intranet'];
-$GLOBALS['TL_LANG']['FMD']['vrpayment_menuelist'] = ['Mittagstisch-Menü Leser', 'Zeigt das Modul an'];
+$GLOBALS['TL_LANG']['FMD']['vrp_menueslist'] = ['Mittagstisch-Menü Leser', 'Zeigt das Modul an'];

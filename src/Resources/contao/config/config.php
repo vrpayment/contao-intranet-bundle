@@ -23,5 +23,5 @@ array_insert($GLOBALS['BE_MOD'], 0, [
 /**
  * Frontend Modules
  */
-$GLOBALS['FE_MOD']['vrpayment-intranet']['report_menuelist'] = 'Vrpayment\ContaoIntranetBundle\Proxys\FrontendProxyModule';
+$GLOBALS['FE_MOD']['vrpayment-intranet']['vrp_menueslist'] = 'Vrpayment\ContaoIntranetBundle\Module\MenuesList';
 
