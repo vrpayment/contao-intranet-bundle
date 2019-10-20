@@ -5,6 +5,8 @@ namespace Vrpayment\ContaoIntranetBundle\Module;
 
 
 use Contao\BackendTemplate;
+use Contao\Input;
+use Contao\Model\Collection;
 use Haste\Form\Form;
 use Patchwork\Utf8;
 use Vrpayment\ContaoIntranetBundle\Model\VrpIntranetMenueModel;
@@ -45,9 +47,36 @@ class MenuesList extends AbstractModule
      */
     protected function compile()
     {
-        $menues = VrpIntranetMenueModel::findAllPublished();
+        if('addMenue' === Input::post('FORM_SUBMIT'))
+        {
+            dump(Input::post('item'));
 
-        dump($menues); exit;
+        }
+        $this->Template->menues = $this->getMenueList();
 
+    }
+
+    protected function getMenueList()
+    {
+        /** @var Collection $menueCollection */
+        $menueCollection = VrpIntranetMenueModel::findAllPublished();
+
+        if(null === $menueCollection)
+        {
+            return null;
+        }
+
+        $r = [];
+
+        /** @var VrpIntranetMenueModel $menu */
+        foreach($menueCollection as $menu)
+        {
+            $r[] = [
+                'menue' => $menu->row(),
+                'src' => $this->getImageObject($menu->singleSRC, [300,250])
+            ];
+        }
+
+        return $r;
     }
 }

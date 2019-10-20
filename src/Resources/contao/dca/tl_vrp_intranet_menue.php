@@ -56,7 +56,7 @@ $GLOBALS['TL_DCA']['tl_vrp_intranet_menue'] = [
 
     // Palettes
     'palettes' => [
-        'default' => '{default_legend},title;{image_legend},singleSRC;{admin_legend},published;',
+        'default' => '{default_legend},title,description;{image_legend},singleSRC;{admin_legend},published;',
         '__selector__' => [],
     ],
 
@@ -76,6 +76,14 @@ $GLOBALS['TL_DCA']['tl_vrp_intranet_menue'] = [
             'inputType' => 'text',
             'eval' => ['mandatory' => true, 'maxlength' => 255, 'tl_class' => 'long'],
             'sql' => "varchar(255) NOT NULL default ''",
+        ],
+        'description' => [
+            'label' => &$GLOBALS['TL_LANG']['tl_vrp_intranet_menue']['description'],
+            'exclude' => true,
+            'inputType' => 'textarea',
+            'eval' => ['mandatory' => true, 'rte' => 'tinyMCE', 'helpwizard' => true],
+            'explanation' => 'insertTags',
+            'sql' => 'mediumtext NULL',
         ],
         'singleSRC' => [
             'label' => &$GLOBALS['TL_LANG']['tl_vrp_intranet_menue']['singleSRC'],

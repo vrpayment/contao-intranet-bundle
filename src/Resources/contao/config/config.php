@@ -25,3 +25,8 @@ array_insert($GLOBALS['BE_MOD'], 0, [
  */
 $GLOBALS['FE_MOD']['vrpayment-intranet']['vrp_menueslist'] = 'Vrpayment\ContaoIntranetBundle\Module\MenuesList';
 
+/**
+ * Register Models
+ */
+$GLOBALS['TL_MODELS']['tl_vrp_intranet_menue'] = 'Vrpayment\ContaoIntranetBundle\Model\VrpIntranetMenueModel';
+

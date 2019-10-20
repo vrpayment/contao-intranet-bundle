@@ -21,5 +21,6 @@ $GLOBALS['TL_LANG']['tl_vrp_intranet_menue']['admin_legend'] = 'Bild';
 
 /* Fields */
 $GLOBALS['TL_LANG']['tl_vrp_intranet_menue']['title'] = ['Bezeichnung', 'Geben Sie hier die  Bezeichnung für den Inhalt an'];
+$GLOBALS['TL_LANG']['tl_vrp_intranet_menue']['description'] = ['Beschreibung', 'Geben Sie hier die  Beschreibung für den Inhalt an'];
 $GLOBALS['TL_LANG']['tl_vrp_intranet_menue']['singleSRC'] = ['Bild/Grafik', 'Wählen Sie hier eine entsprechende Grafik- oder Bilddatei aus'];
 $GLOBALS['TL_LANG']['tl_vrp_intranet_menue']['published'] = ['Aktiv', 'Aktivieren Sie diese Option um den Eintrag im Frontend anzeigen zu lassen'];
