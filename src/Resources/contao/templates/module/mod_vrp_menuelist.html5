@@ -1,4 +1,22 @@
 <?php if ('select' === $this->part): ?>
+    <h3>Sie bestellen für <?= $this->dayOrderedFor; ?></h3>
+
+    <?php if($this->ordersCurrentDay): ?>
+        <h4>Sie haben bereits für diesen Tag wie folgt bestellt:</h4>
+        <ul>
+            <?php foreach($this->ordersCurrentDay as $order): ?>
+            <li>
+                <span><?= $order['date'] ?></span>
+                <ul>
+                    <?php foreach($order['items'] as $item): ?>
+                    <li><?php echo $item['title']; ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+
     <?php if(null !== $this->menues): ?>
         <div class="menue-container">
             <form action="<?php echo $this->action; ?>" class="tl_form" method="post">
@@ -31,6 +49,8 @@
 <?php if ('order' === $this->part): ?>
     <div class="order-container">
         <h1>Ihre Bestellung war erfolgreich!</h1>
+        <p>Sie haben bestellt:</p>
+        <strong><?= $this->order; ?></strong>
     </div>
 <?php endif; ?>
 

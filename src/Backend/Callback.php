@@ -13,12 +13,39 @@ namespace Vrpayment\ContaoIntranetBundle\Backend;
 
 
 use Contao\Backend;
+use Contao\MemberModel;
+use Contao\Model\Collection;
+use NotificationCenter\Model\Notification;
 
 class Callback extends Backend
 {
     public function getNotifications()
     {
+        /** @var Collection $notifications */
+        $notifications = Notification::findAll();
 
+        $r = [];
 
+        foreach($notifications as $notification)
+        {
+            $r[$notification->id] = $notification->title;
+        }
+
+        return $r;
+    }
+
+    public function getMembers()
+    {
+        $members = MemberModel::findAll();
+
+        $r = [];
+
+        /** @var MemberModel $member */
+        foreach($members as $member)
+        {
+            $r[$member->id] = $member->firstname.' '.$member->lastname;
+        }
+
+        return $r;
     }
 }

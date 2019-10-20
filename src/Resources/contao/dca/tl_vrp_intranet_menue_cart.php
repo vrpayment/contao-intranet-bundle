@@ -34,5 +34,8 @@ $GLOBALS['TL_DCA']['tl_vrp_intranet_menue_cart'] = [
         'token' => [
             'sql' => "varchar(255) NOT NULL default ''",
         ],
+        'orderedFor' => [
+            'sql' => "int(10) unsigned NOT NULL default '0'",
+        ],
     ],
 ];

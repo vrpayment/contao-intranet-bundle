@@ -29,4 +29,25 @@ $GLOBALS['FE_MOD']['vrpayment-intranet']['vrp_menueslist'] = 'Vrpayment\ContaoIn
  * Register Models
  */
 $GLOBALS['TL_MODELS']['tl_vrp_intranet_menue'] = 'Vrpayment\ContaoIntranetBundle\Model\VrpIntranetMenueModel';
+$GLOBALS['TL_MODELS']['tl_vrp_intranet_menue_cart'] = 'Vrpayment\ContaoIntranetBundle\Model\VrpIntranetMenueCartModel';
+
+/*
+ * Notification Center
+ */
+$GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['vrp_intranet'] = [
+    'intranet_notification' => [
+        'email_sender_address' => ['admin_mail'],
+        'email_sender_name' => ['admin_name'],
+        'recipients' => ['member_email', 'admin_email'],
+        'email_subject' => ['member_*', 'orderdate'],
+        'email_text' => ['member_*', 'member_name', 'orderdate', 'order'],
+    ],
+    'intranet_admin_notification' => [
+        'email_sender_address' => ['admin_mail'],
+        'email_sender_name' => ['admin_name'],
+        'recipients' => ['member_email', 'admin_mail'],
+        'email_subject' => ['member_*', 'orderdate'],
+        'email_text' => ['member_*', 'member_name', 'orderdate', 'orders'],
+    ],
+];
 
