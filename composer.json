@@ -16,7 +16,7 @@
     "symfony/monolog-bundle": "^3.4",
     "ext-curl": "*",
     "ramsey/uuid": "^3.8",
-    "terminal42/notification_center": "dev-master"
+    "terminal42/notification_center": "^1.5"
   },
   "conflict": {
     "contao/core": "*",
