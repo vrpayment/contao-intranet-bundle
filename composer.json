@@ -16,7 +16,8 @@
     "symfony/monolog-bundle": "^3.4",
     "ext-curl": "*",
     "ramsey/uuid": "^3.8",
-    "terminal42/notification_center": "^1.5"
+    "terminal42/notification_center": "^1.5",
+    "phpoffice/phpspreadsheet": "^1.2"
   },
   "conflict": {
     "contao/core": "*",
