@@ -14,6 +14,7 @@ use Contao\Model;
  * @property string type
  * @property string items
  * @property int completed
+ * @property string token
  *
  * @package Vrpayment\ContaoIntranetBundle\Model
  */
@@ -30,13 +31,15 @@ class VrpIntranetMenueCartModel extends Model
      * @param array $values
      * @return VrpIntranetMenueCartModel
      */
-    public static function add(array $values)
+    public static function add(int $memberId, array $items)
     {
         $m = new self();
         $m->tstamp = time();
-        $m->member = $values['member'];
+        $m->member = $memberId;
         $m->type = 'cart';
-        $m->items = $values['items'];
+        $m->items = serialize($items);
+        $m->completed = 1;
+        $m->token = 'order-'.substr(md5($memberId.time()),0, 28);
 
         $m->save();
 

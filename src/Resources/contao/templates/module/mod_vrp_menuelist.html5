@@ -1,27 +1,37 @@
-<?php if(null !== $this->menues): ?>
-    <div class="menue-container">
-        <form action="<?php echo $this->action; ?>" class="tl_form" method="post">
-            <input type="hidden" name="FORM_SUBMIT" value="addMenue">
-            <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
-            <?php foreach($this->menues as $menue): ?>
-            <div class="menue-item item-<?= $menue['menue']['id']; ?>">
-                <div class="content-container">
-                    <div class="image">
-                        <img src="<?= $menue['src']->img['srcset']; ?>" width="<?= $menue['src']->img['width']; ?>" height="<?= $menue['src']->img['height']; ?>">
+<?php if ('select' === $this->part): ?>
+    <?php if(null !== $this->menues): ?>
+        <div class="menue-container">
+            <form action="<?php echo $this->action; ?>" class="tl_form" method="post">
+                <input type="hidden" name="FORM_SUBMIT" value="addMenue">
+                <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
+                <?php foreach($this->menues as $menue): ?>
+                    <div class="menue-item item-<?= $menue['menue']['id']; ?>">
+                        <div class="content-container">
+                            <div class="image">
+                                <img src="<?= $menue['src']->img['srcset']; ?>" width="<?= $menue['src']->img['width']; ?>" height="<?= $menue['src']->img['height']; ?>">
 
+                            </div>
+                            <div class="description">
+                                <h1><?= $menue['menue']['title']; ?></h1>
+                                <?= $menue['menue']['description']; ?>
+                            </div>
+                            <div class="formfield">
+                                <label for="item[]; ?>]">Auswählen</label>
+                                <input name="item[]" value="<?= $menue['menue']['id']; ?>" type="radio">
+                            </div>
+                        </div>
                     </div>
-                    <div class="description">
-                        <h1><?= $menue['menue']['title']; ?></h1>
-                        <?= $menue['menue']['description']; ?>
-                    </div>
-                    <div class="formfield">
-                        <input name="item[<?= $menue['menue']['id']; ?>]" type="text">
-                    </div>
-                </div>
-            </div>
-            <?php endforeach; ?>
-            <input type="submit" class="submit" name="Absenden">
-        </form>
+                <?php endforeach; ?>
+                <input type="submit" class="submit" name="order" value="Bestellung verbindlich absenden">
+            </form>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
+
+<?php if ('order' === $this->part): ?>
+    <div class="order-container">
+        <h1>Ihre Bestellung war erfolgreich!</h1>
     </div>
 <?php endif; ?>
+
 

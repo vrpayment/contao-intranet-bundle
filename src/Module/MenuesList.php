@@ -5,10 +5,12 @@ namespace Vrpayment\ContaoIntranetBundle\Module;
 
 
 use Contao\BackendTemplate;
+use Contao\FrontendUser;
 use Contao\Input;
 use Contao\Model\Collection;
 use Haste\Form\Form;
 use Patchwork\Utf8;
+use Vrpayment\ContaoIntranetBundle\Model\VrpIntranetMenueCartModel;
 use Vrpayment\ContaoIntranetBundle\Model\VrpIntranetMenueModel;
 
 class MenuesList extends AbstractModule
@@ -39,6 +41,8 @@ class MenuesList extends AbstractModule
             return $objTemplate->parse();
         }
 
+        Input::setGet('bestellt', Input::get('auto_item'));
+
         return parent::generate();
     }
 
@@ -47,13 +51,22 @@ class MenuesList extends AbstractModule
      */
     protected function compile()
     {
+        $this->import(FrontendUser::class, 'User');
+
         if('addMenue' === Input::post('FORM_SUBMIT'))
         {
-            dump(Input::post('item'));
+            /** @var VrpIntranetMenueModel $menue */
+            $menue = VrpIntranetMenueModel::findOneBy('id', Input::post('item'));
+
+            $order = VrpIntranetMenueCartModel::add($this->User->id, [$menue->id]);
+
+            return $this->redirectToStep('bestellt', 'order='.$order->token);
 
         }
-        $this->Template->menues = $this->getMenueList();
 
+        $this->Template->part = (null === Input::get('bestellt')) ? 'select' : 'order';
+        $this->Template->menues = $this->getMenueList();
+        $this->Template->user = $this->User->getData();
     }
 
     protected function getMenueList()

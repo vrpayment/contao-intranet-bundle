@@ -4,12 +4,26 @@
 namespace Vrpayment\ContaoIntranetBundle\Module;
 
 
+use Contao\Controller;
 use Contao\FilesModel;
 use Contao\Image\PictureConfigurationInterface;
 use Contao\Module;
+use Contao\System;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 abstract class AbstractModule extends Module
 {
+
+    protected function redirectToStep(string $step, string $parameter = '')
+    {
+        $url = $GLOBALS['objPage']->getAbsoluteUrl('/' . $step);
+
+        if ('' !== $parameter) {
+            $url = $url . '?' . $parameter;
+        }
+
+        Controller::redirect($url);
+    }
 
     /**
      * @param string $imageSrc

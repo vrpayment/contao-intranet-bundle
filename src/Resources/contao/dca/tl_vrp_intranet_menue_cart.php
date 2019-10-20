@@ -31,5 +31,8 @@ $GLOBALS['TL_DCA']['tl_vrp_intranet_menue_cart'] = [
         'completed' => [
             'sql' => "int(10) unsigned NOT NULL default '0'",
         ],
+        'token' => [
+            'sql' => "varchar(255) NOT NULL default ''",
+        ],
     ],
 ];
