@@ -14,8 +14,10 @@ use Contao\System;
 use Haste\Form\Form;
 use NotificationCenter\Model\Notification;
 use Patchwork\Utf8;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Vrpayment\ContaoIntranetBundle\Model\VrpIntranetMenueCartModel;
 use Vrpayment\ContaoIntranetBundle\Model\VrpIntranetMenueModel;
+use Vrpayment\ContaoIntranetBundle\SpreadsheetGenerator;
 use Vrpayment\ContaoIntranetBundle\StaticHelper;
 
 class MenuesList extends AbstractModule
@@ -153,7 +155,7 @@ class MenuesList extends AbstractModule
         $tokens['member_email'] = $user->email;
         $tokens['member_name'] = $user->firstname.' '.$user->lastname;
         $tokens['order'] = $order;
-        $tokens['orderdate'] = date('d.m.Y H:I', $cartModel->tstamp);
+        $tokens['orderdate'] = date('d.m.Y H:i', $cartModel->tstamp);
 
         $notification->send($tokens);
     }
@@ -202,14 +204,60 @@ class MenuesList extends AbstractModule
                 $ordertext .=VrpIntranetMenueModel::findOneBy('id', $key)->title.': '.$value.' mal | ';
             }
 
+            // Write Export File
+            $rootDir = System::getContainer()->getParameter('kernel.project_dir');
+            $folderMenueExports = '/files/intranet-menue-exports';
+            $fileName = 'bestellung-'.date('d-m-Y-H-i', StaticHelper::getLastDayOrderedFor()).'.xlsx';
+
+            if(!is_dir($rootDir.$folderMenueExports))
+            {
+                mkdir($rootDir.$folderMenueExports);
+            }
+
+            $excelFilepath =  $rootDir .$folderMenueExports. '/'.$fileName;
+            $this->generateExport($menues, $excelFilepath);
+
             $tokens['admin_mail'] = $member->email;
             $tokens['admin_name'] = $member->firstname.' '.$member->lastname;
             $tokens['orders'] = $ordertext;
             $tokens['orderdate'] = date('d.m.Y H:i', StaticHelper::getLastDayOrderedFor());
+            $tokens['exportfile'] = $folderMenueExports. '/'.$fileName;
 
             $notification->send($tokens);
-
         }
+    }
+
+
+
+    protected function generateExport(array $menues, string $pathToFile)
+    {
+        /** @var SpreadsheetGenerator $spreadsheet */
+        $spreadsheet = new SpreadsheetGenerator(new Spreadsheet());
+        $spreadsheet->setSheetRow($this->getSheetFirstRow());
+        $count = 2;
+
+        foreach($menues as $key => $value)
+        {
+            $row = [
+                'A'.$count => VrpIntranetMenueModel::findOneBy('id', $key)->title,
+                'B'.$count => $value,
+            ];
+
+            $spreadsheet->setSheetRow($row);
+
+            $count++;
+        }
+
+        $spreadsheet->saveFileOutputXls($pathToFile);
+    }
+
+    protected function getSheetFirstRow()
+    {
+        return [
+            'A1' => 'Menü',
+            'B1' => 'Anzahl'
+        ];
+
     }
 
     protected function getMenueList()

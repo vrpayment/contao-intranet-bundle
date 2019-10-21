@@ -48,6 +48,9 @@ $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['vrp_intranet'] = [
         'recipients' => ['member_email', 'admin_mail'],
         'email_subject' => ['member_*', 'orderdate'],
         'email_text' => ['member_*', 'member_name', 'orderdate', 'orders'],
+        'attachment_tokens'    => [
+            'exportfile'
+        ]
     ],
 ];
 
