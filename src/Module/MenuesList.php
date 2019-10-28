@@ -60,8 +60,6 @@ class MenuesList extends AbstractModule
     {
         $this->import(FrontendUser::class, 'User');
 
-        $this->sendDailyOverview($this->vrp_selectNotificationAdmin, $this->vrp_selectAdmin);
-
         $dayOrderedFor = StaticHelper::getDayOrderedFor();
 
         if('addMenue' === Input::post('FORM_SUBMIT'))
@@ -225,39 +223,6 @@ class MenuesList extends AbstractModule
 
             $notification->send($tokens);
         }
-    }
-
-
-
-    protected function generateExport(array $menues, string $pathToFile)
-    {
-        /** @var SpreadsheetGenerator $spreadsheet */
-        $spreadsheet = new SpreadsheetGenerator(new Spreadsheet());
-        $spreadsheet->setSheetRow($this->getSheetFirstRow());
-        $count = 2;
-
-        foreach($menues as $key => $value)
-        {
-            $row = [
-                'A'.$count => VrpIntranetMenueModel::findOneBy('id', $key)->title,
-                'B'.$count => $value,
-            ];
-
-            $spreadsheet->setSheetRow($row);
-
-            $count++;
-        }
-
-        $spreadsheet->saveFileOutputXls($pathToFile);
-    }
-
-    protected function getSheetFirstRow()
-    {
-        return [
-            'A1' => 'Menü',
-            'B1' => 'Anzahl'
-        ];
-
     }
 
     protected function getMenueList()

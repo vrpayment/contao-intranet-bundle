@@ -16,6 +16,11 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['vrp_menueslist'] = '
 {template_legend:hide},customTpl;
 {expert_legend:hide},guests,cssID,space';
 
+$GLOBALS['TL_DCA']['tl_module']['palettes']['vrp_menuescronjob'] = '
+{title_legend},name,type;
+{notification_legend},vrp_selectNotificationAdmin;
+{admin_legend},vrp_selectAdmin';
+
 $GLOBALS['TL_DCA']['tl_module']['fields']['vrp_selectNotification'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_module']['vrp_selectNotification'],
     'exclude' => true,

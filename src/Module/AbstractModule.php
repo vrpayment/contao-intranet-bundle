@@ -9,7 +9,10 @@ use Contao\FilesModel;
 use Contao\Image\PictureConfigurationInterface;
 use Contao\Module;
 use Contao\System;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Vrpayment\ContaoIntranetBundle\Model\VrpIntranetMenueModel;
+use Vrpayment\ContaoIntranetBundle\SpreadsheetGenerator;
 
 abstract class AbstractModule extends Module
 {
@@ -121,6 +124,40 @@ abstract class AbstractModule extends Module
         }
 
         return false;
+    }
+
+
+
+
+    protected function generateExport(array $menues, string $pathToFile)
+    {
+        /** @var SpreadsheetGenerator $spreadsheet */
+        $spreadsheet = new SpreadsheetGenerator(new Spreadsheet());
+        $spreadsheet->setSheetRow($this->getSheetFirstRow());
+        $count = 2;
+
+        foreach($menues as $key => $value)
+        {
+            $row = [
+                'A'.$count => VrpIntranetMenueModel::findOneBy('id', $key)->title,
+                'B'.$count => $value,
+            ];
+
+            $spreadsheet->setSheetRow($row);
+
+            $count++;
+        }
+
+        $spreadsheet->saveFileOutputXls($pathToFile);
+    }
+
+    protected function getSheetFirstRow()
+    {
+        return [
+            'A1' => 'Menü',
+            'B1' => 'Anzahl'
+        ];
+
     }
 
 }
