@@ -51,6 +51,17 @@ class StaticHelper
         return $todayLastOrder;
     }
 
+    public static function getCurrentDayOrderedFor()
+    {
+        $now = time();
+        $day = date('d', $now);
+        $month = date('m', $now);
+        $year = date('Y', $now);
+        $todayLastOrder = mktime(9, 00, 0, $month, $day, $year);
+
+        return $todayLastOrder;
+    }
+
     public static function getOrdersWithDetails(Collection $orders)
     {
         $r = [];

@@ -62,7 +62,7 @@ class MenuesCronjob extends AbstractModule
             return false;
         }
 
-        $dailyOrders = VrpIntranetMenueCartModel::findByDayOrdered(StaticHelper::getLastDayOrderedFor());
+        $dailyOrders = VrpIntranetMenueCartModel::findByDayOrdered(StaticHelper::getCurrentDayOrderedFor());
 
         if(null === $dailyOrders)
         {
