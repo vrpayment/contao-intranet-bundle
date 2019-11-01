@@ -96,7 +96,7 @@ class MenuesCronjob extends AbstractModule
         // Write Export File
         $rootDir = System::getContainer()->getParameter('kernel.project_dir');
         $folderMenueExports = '/files/intranet-menue-exports';
-        $fileName = 'bestellung-'.date('d-m-Y-H-i', StaticHelper::getLastDayOrderedFor()).'.xlsx';
+        $fileName = 'bestellung-'.date('d-m-Y-H-i', StaticHelper::getCurrentDayOrderedFor()).'.xlsx';
 
         if(!is_dir($rootDir.$folderMenueExports))
         {
@@ -109,7 +109,7 @@ class MenuesCronjob extends AbstractModule
         $tokens['admin_mail'] = $member->email;
         $tokens['admin_name'] = $member->firstname.' '.$member->lastname;
         $tokens['orders'] = $ordertext;
-        $tokens['orderdate'] = date('d.m.Y H:i', StaticHelper::getLastDayOrderedFor());
+        $tokens['orderdate'] = date('d.m.Y H:i', StaticHelper::getCurrentDayOrderedFor());
         $tokens['exportfile'] = $folderMenueExports. '/'.$fileName;
 
         $notification->send($tokens);
