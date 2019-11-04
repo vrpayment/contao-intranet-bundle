@@ -104,7 +104,7 @@ class MenuesCronjob extends AbstractModule
         }
 
         $excelFilepath =  $rootDir .$folderMenueExports. '/'.$fileName;
-        $this->generateExport($menues, $excelFilepath);
+        $this->generateExport($menues, $orders, $excelFilepath);
 
         $tokens['admin_mail'] = $member->email;
         $tokens['admin_name'] = $member->firstname.' '.$member->lastname;

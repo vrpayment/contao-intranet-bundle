@@ -129,7 +129,7 @@ abstract class AbstractModule extends Module
 
 
 
-    protected function generateExport(array $menues, string $pathToFile)
+    protected function generateExport(array $menues, array $orders, string $pathToFile)
     {
         /** @var SpreadsheetGenerator $spreadsheet */
         $spreadsheet = new SpreadsheetGenerator(new Spreadsheet());
@@ -145,6 +145,40 @@ abstract class AbstractModule extends Module
 
             $spreadsheet->setSheetRow($row);
 
+            $count++;
+        }
+
+        $spreadsheet->setSheetRow([
+            'A'.$count => '---------------'
+        ]);
+
+        $count++;
+
+        $spreadsheet->setSheetRow([
+            'A'.$count => 'Bestellungen personenbezogen'
+        ]);
+
+        $count++;
+
+        $spreadsheet->setSheetRow([
+            'A'.$count => '---------------'
+        ]);
+
+        $count++;
+
+        $spreadsheet->setSheetRow([
+            'A'.$count => 'NAME MITARBEITER/IN',
+            'B'.$count => 'MENÜ'
+        ]);
+
+        $count++;
+
+        foreach($orders as $order)
+        {
+            $spreadsheet->setSheetRow([
+                'A'.$count => $order['member'].':',
+                'B'.$count => $order['items'][0]['title']
+            ]);
             $count++;
         }
 
