@@ -78,7 +78,7 @@ class StaticHelper
 
                 if(null === $menue)
                 {
-                    return null;
+                    continue;
                 }
 
                 $items[] = [
