@@ -19,7 +19,7 @@
 
     <?php if(null !== $this->menues): ?>
         <div class="menue-container">
-            <form action="<?php echo $this->action; ?>" class="tl_form" method="post">
+            <form name="menu-list" action="<?php echo $this->action; ?>" class="tl_form" method="post">
                 <input type="hidden" name="FORM_SUBMIT" value="addMenue">
                 <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
                 <?php foreach($this->menues as $menue): ?>
@@ -34,8 +34,8 @@
                                 <?= $menue['menue']['description']; ?>
                             </div>
                             <div class="formfield">
-                                <label for="item[]; ?>]">Auswählen</label>
-                                <input name="item[]" value="<?= $menue['menue']['id']; ?>" type="radio">
+                                <label for="item[]">Auswählen</label>
+                                <input name="item[]" value="<?= $menue['menue']['id']; ?>" type="radio" required>
                             </div>
                         </div>
                     </div>
